@@ -1,8 +1,8 @@
 package com.pubnub.subscribe {
 	import com.pubnub.*;
 	import com.pubnub.environment.*;
-	import com.pubnub.json.*;
-import com.pubnub.json.PnJSON;
+	import com.adobe.serialization.json.*;
+import com.adobe.serialization.json.JSON;
 import com.pubnub.operation.*;
 	import flash.events.*;
 	import flash.utils.*;
@@ -136,7 +136,7 @@ import com.pubnub.operation.*;
 
                 for (var i:int = 0; i < messages.length; i++) {
 
-                    var msg:* = cipherKey.length > 0 ? PnJSON.parse(PnCrypto.decrypt(cipherKey, messages[i])) : messages[i];
+                    var msg:* = cipherKey.length > 0 ? JSON.decode(PnCrypto.decrypt(cipherKey, messages[i])) : messages[i];
 
                     _data = {
                         channel:_name,

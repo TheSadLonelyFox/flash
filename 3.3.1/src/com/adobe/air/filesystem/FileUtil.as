@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2008, Adobe Systems Incorporated
+  Copyright (c) 2009, Adobe Systems Incorporated
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without 
@@ -30,47 +30,34 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-package com.adobe.net
+package com.adobe.air.filesystem
 {
-	/**
-	 * The URI class cannot know about DNS aliases, virtual hosts, or
-	 * symbolic links that may be involved.  The application can provide
-	 * an implementation of this interface to resolve the URI before the
-	 * URI class makes any comparisons.  For example, a web host has
-	 * two aliases:
-	 * 
-	 * <p><code>
-	 *    http://www.site.com/
-	 *    http://www.site.net/
-	 * </code></p>
-	 * 
-	 * <p>The application can provide an implementation that automatically
-	 * resolves site.net to site.com before URI compares two URI objects.
-	 * Only the application can know and understand the context in which
-	 * the URI's are being used.</p>
-	 * 
-	 * <p>Use the URI.resolver accessor to assign a custom resolver to
-	 * the URI class.  Any resolver specified is global to all instances
-	 * of URI.</p>
-	 * 
-	 * <p>URI will call this before performing URI comparisons in the
-	 * URI.getRelation() and URI.getCommonParent() functions.</p>
-	 * 
-	 * @see URI.getRelation
-	 * @see URI.getCommonParent
-	 * 
-	 * @langversion ActionScript 3.0
-	 * @playerversion Flash 9.0
-	 */
-	public interface IURIResolver
+	import flash.system.Capabilities;
+	import flash.filesystem.File;
+	
+	
+	public class FileUtil
 	{
 		/**
-		 * Implement this method to provide custom URI resolution for
-		 * your application.
-		 * 
-		 * @langversion ActionScript 3.0
-		 * @playerversion Flash 9.0
+		 *	@return An Array of Files representing the root directories of the
+		 * 			operating system.
 		 */
-		function resolve(uri:URI) : URI;
+		public static function getRootDirectories():Array
+		{
+			var v:Array = File.getRootDirectories();
+			var os:String = Capabilities.os;
+
+			if(os.indexOf("Mac") > -1)
+			{
+				v = File(v[0]).resolvePath("Volumes").getDirectoryListing();
+			}
+			else if(os.indexOf("Linux") > -1)
+			{
+				//todo: need to impliment Linux
+			}
+			
+			return v;
+		}
+
 	}
 }

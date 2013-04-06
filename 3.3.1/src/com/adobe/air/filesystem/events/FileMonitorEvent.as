@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2008, Adobe Systems Incorporated
+  Copyright (c) 2009, Adobe Systems Incorporated
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without 
@@ -30,47 +30,32 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-package com.adobe.net
+package com.adobe.air.filesystem.events
 {
-	/**
-	 * The URI class cannot know about DNS aliases, virtual hosts, or
-	 * symbolic links that may be involved.  The application can provide
-	 * an implementation of this interface to resolve the URI before the
-	 * URI class makes any comparisons.  For example, a web host has
-	 * two aliases:
-	 * 
-	 * <p><code>
-	 *    http://www.site.com/
-	 *    http://www.site.net/
-	 * </code></p>
-	 * 
-	 * <p>The application can provide an implementation that automatically
-	 * resolves site.net to site.com before URI compares two URI objects.
-	 * Only the application can know and understand the context in which
-	 * the URI's are being used.</p>
-	 * 
-	 * <p>Use the URI.resolver accessor to assign a custom resolver to
-	 * the URI class.  Any resolver specified is global to all instances
-	 * of URI.</p>
-	 * 
-	 * <p>URI will call this before performing URI comparisons in the
-	 * URI.getRelation() and URI.getCommonParent() functions.</p>
-	 * 
-	 * @see URI.getRelation
-	 * @see URI.getCommonParent
-	 * 
-	 * @langversion ActionScript 3.0
-	 * @playerversion Flash 9.0
-	 */
-	public interface IURIResolver
+	import flash.events.Event;
+	import flash.filesystem.File;
+
+	public class FileMonitorEvent extends Event
 	{
-		/**
-		 * Implement this method to provide custom URI resolution for
-		 * your application.
-		 * 
-		 * @langversion ActionScript 3.0
-		 * @playerversion Flash 9.0
-		 */
-		function resolve(uri:URI) : URI;
+		public static const CHANGE:String = "onFileChange";
+		public static const MOVE:String = "onFileMove";
+		public static const CREATE:String = "onFileCreate";
+		public static const ADD_VOLUME:String = "onVolumeAdd";
+		public static const REMOVE_VOLUME:String = "onVolumeRemove";
+		
+		public var file:File;
+		public function FileMonitorEvent(type:String, bubbles:Boolean=false, 
+				cancelable:Boolean=false)
+		{
+			super(type, bubbles, cancelable);
+		}
+		
+		public override function clone():Event
+		{
+			var out:FileMonitorEvent = new FileMonitorEvent(type, bubbles, cancelable);
+			out.file = file;
+			
+			return out;
+		}
 	}
 }

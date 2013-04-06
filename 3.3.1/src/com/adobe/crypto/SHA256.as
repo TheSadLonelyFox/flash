@@ -1,4 +1,4 @@
-﻿/*
+/*
   Copyright (c) 2008, Adobe Systems Incorporated
   All rights reserved.
 
@@ -34,7 +34,7 @@ package com.adobe.crypto
 {
 	import com.adobe.utils.IntUtil;
 	import flash.utils.ByteArray;
-	//import mx.utils.Base64Encoder;
+	import mx.utils.Base64Encoder;
 	
 	/**
 	 * The SHA-256 algorithm
@@ -100,7 +100,7 @@ package com.adobe.crypto
 		 *  @playerversion	9.0
 		 *  @tiptext
 		 */
-		/*public static function hashToBase64( s:String ):String
+		public static function hashToBase64( s:String ):String
 		{
 			var blocks:Array = createBlocksFromString( s );
 			var byteArray:ByteArray = hashBlocks(blocks);
@@ -120,7 +120,7 @@ package com.adobe.crypto
 			var encoder:Base64Encoder = new Base64Encoder();
 			encoder.encode(charsInByteArray);
 			return encoder.flush();
-		}*/
+		}
 		
 		private static function hashBlocks( blocks:Array ):ByteArray {
 			var h0:int = 0x6a09e667;

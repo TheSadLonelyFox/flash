@@ -6,7 +6,7 @@ package com.pubnub {
 	import com.hurlant.crypto.symmetric.PKCS5;
 	import com.hurlant.util.Base64;
 	import com.hurlant.util.Hex;
-	import com.pubnub.json.PnJSON;
+	import com.adobe.serialization.json.JSON;
 	import flash.utils.ByteArray;
 
 	public class PnCrypto extends Object{

@@ -2,7 +2,7 @@ package com.pubnub.subscribe {
 import com.pubnub.*;
 import com.pubnub.connection.*;
 import com.pubnub.environment.*;
-import com.pubnub.json.*;
+import com.adobe.serialization.json.*;
 import com.pubnub.log.Log;
 import com.pubnub.net.*;
 import com.pubnub.operation.*;
@@ -307,7 +307,7 @@ public class Subscribe extends EventDispatcher {
     private function decryptMessages(messages:Array):void {
         if (messages) {
             for (var i:int = 0; i < messages.length; i++) {
-                var msg:* = cipherKey.length > 0 ? PnJSON.parse(PnCrypto.decrypt(cipherKey, messages[i])) : messages[i];
+                var msg:* = cipherKey.length > 0 ? JSON.decode(PnCrypto.decrypt(cipherKey, messages[i])) : messages[i];
                 messages[i] = msg;
             }
         }

@@ -12,7 +12,7 @@
 			import com.pubnub.*;
 			import com.pubnub.environment.EnvironmentEvent;
 			import com.pubnub.environment.NetMonEvent;
-			import com.pubnub.json.*;
+			import com.adobe.serialization.json.*;
 			import com.pubnub.log.Log;
 			import com.pubnub.operation.*;
 			
@@ -103,7 +103,7 @@
 		}
 		
 		private function onPnShutdown(e:EnvironmentEvent):void {
-			callExternalInterface("console.log", ("Pn SHUTDOWN:" + PnJSON.stringify(e.data) ));
+			callExternalInterface("console.log", ("Pn SHUTDOWN:" + JSON.encode(e.data) ));
 		}
 		
         private function onInit(e:PnEvent):void {
@@ -125,7 +125,7 @@
 			//if (perfomance.isRun) return;
             switch (e.status) {
                 case OperationStatus.DATA:
-                    callExternalInterface("console.log", ("Subscribe [DATA]: " + PnJSON.stringify(e.data)));
+                    callExternalInterface("console.log", ("Subscribe [DATA]: " + JSON.encode(e.data)));
                     break;
 
                 case OperationStatus.CONNECT:
@@ -133,7 +133,7 @@
                     break;
 
                 case OperationStatus.DISCONNECT:
-                    callExternalInterface("console.log", ("Subscribe [DISCONNECT] :" + PnJSON.stringify(e.data)));
+                    callExternalInterface("console.log", ("Subscribe [DISCONNECT] :" + JSON.encode(e.data)));
                     break;
 
                 case OperationStatus.ERROR:
@@ -144,7 +144,7 @@
         }
 		
 		private function onPresence(e:PnEvent):void {
-			 callExternalInterface("console.log", ("Presence : " + PnJSON.stringify(e.data)));
+			 callExternalInterface("console.log", ("Presence : " + JSON.encode(e.data)));
 			 channelsDataProvider = new ArrayCollection(Pn.getSubscribeChannels());
 		}
 
@@ -242,11 +242,11 @@
 			//if (perfomance.isRun) return;
 			switch (e.status) {
                 case OperationStatus.DATA:
-                    callExternalInterface("console.log", ("Time [DATA]: " + PnJSON.stringify(e.data)));
+                    callExternalInterface("console.log", ("Time [DATA]: " + JSON.encode(e.data)));
                     break;
 
                 case OperationStatus.ERROR:
-                    callExternalInterface("console.log", ("Time [ERROR]: " + PnJSON.stringify(e.data)));
+                    callExternalInterface("console.log", ("Time [ERROR]: " + JSON.encode(e.data)));
                     break;
             }
 		}

@@ -5,7 +5,7 @@ package flexUnitTests
 	import com.pubnub.PnEvent;
 	import com.pubnub.connection.*;
 	import com.pubnub.environment.NetMonEvent;
-	import com.pubnub.json.PnJSON;
+	import com.adobe.serialization.json.JSON;
 	import com.pubnub.operation.OperationStatus;
 	import com.pubnub.subscribe.Subscribe;
 	

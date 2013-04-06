@@ -1,6 +1,6 @@
 package com.pubnub.operation {
 	import com.pubnub.*;
-	import com.pubnub.json.*;
+	import com.adobe.serialization.json.JSON;
 	import com.pubnub.loader.*;
 	import flash.events.*;
 	import org.httpclient.events.*;
@@ -49,7 +49,7 @@ package com.pubnub.operation {
 			var result:* = e.data;
 			if (parseToJSON) {
 				try {
-					result = PnJSON.parse(result);
+					result = JSON.decode(result);
 				}catch (err:Error){
 					dispatchEvent(new OperationEvent(OperationEvent.FAULT, { message:'Error JSON parse', id:'-1' } ));
 					return;

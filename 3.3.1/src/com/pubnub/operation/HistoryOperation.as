@@ -1,6 +1,6 @@
 package com.pubnub.operation {
 	import com.pubnub.*;
-	import com.pubnub.json.*;
+	import com.adobe.serialization.json.*;
 	import com.pubnub.loader.*;
 	/**
 	 * ...
@@ -58,7 +58,7 @@ package com.pubnub.operation {
 		override protected function onLoaderData(e:PnURLLoaderEvent):void {
 			var data:* = e.data;
 			try {
-				var result:Object = PnJSON.parse(data);
+				var result:Object = JSON.decode(data);
 				var messages:Array = [];
 				var mess:Object;
 				if(result) {
@@ -66,7 +66,7 @@ package com.pubnub.operation {
 						if (cipherKey.length > 0) {
 							mess = [i + 1, PnCrypto.decrypt(cipherKey, result[0][i])];
 						}else {
-							mess = [i + 1, PnJSON.stringify(result[0][i])];
+							mess = [i + 1, JSON.encode(result[0][i])];
 						}    
 						messages.push(mess);
 					}

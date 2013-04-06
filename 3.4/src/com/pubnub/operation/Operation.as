@@ -1,6 +1,6 @@
 package com.pubnub.operation {
 
-	import com.pubnub.json.PnJSON;
+	import com.adobe.serialization.json.JSON;
 import com.pubnub.log.Log;
 import com.pubnub.net.URLRequest;
 	import com.pubnub.net.URLRequestHeader;
@@ -64,7 +64,7 @@ import com.pubnub.net.URLRequest;
 			var error:Boolean;
 			if (parseToJSON) {
 				try {
-					result = PnJSON.parse(String(data));
+					result = JSON.decode(String(data));
 				}catch (err:Error) {
                     Log.log("*** Received bad json: " + data, Log.DEBUG);
                     //trace(new Date() + "*** Received bad json: " + data, Log.DEBUG);
